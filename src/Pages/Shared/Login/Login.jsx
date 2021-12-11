@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   useEffect(() => {
-    document.title = "Login your account Birdstory";
+    document.title = "Login your account | Birdstory";
   }, []);
 
   return (

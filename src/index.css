@@ -31,6 +31,14 @@ code {
 .pointer {
   cursor: pointer;
 }
+.text-hover {
+  padding: 3px 10px;
+}
+.text-hover:hover {
+  padding: 3px 10px;
+  background-color: #f0f7ff;
+  border-radius: 5px;
+}
 /* button style */
 
 .btn-blue-green {

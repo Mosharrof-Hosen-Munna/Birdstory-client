@@ -1,17 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { nameValidation } from "../../../validations/authValidation";
+import UserName from "./UserName";
 
 const Register = () => {
   const [count, setCount] = useState(1);
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    birthDate: "",
+    address: "",
+    phone: "",
+  });
+
   useEffect(() => {
     document.title = "Register your new account | Birdstory";
   }, []);
 
+  // add new data to userData state of object
+  const handleUserData = (data) => {
+    const newUserData = { ...userData };
+    for (const d in data) {
+      newUserData[d] = data[d];
+    }
+    setUserData(newUserData);
+  };
+
+  // increase count value 1
   const handleNext = () => {
     setCount(count + 1);
   };
 
+  // decrease count value 1
   const handlePrev = () => {
     setCount(count - 1);
   };
@@ -31,18 +54,30 @@ const Register = () => {
                   Birdstory
                 </span>
               </h2>
-              {count === 1 && <UserName handleNext={handleNext} />}
+              {count === 1 && (
+                <UserName
+                  handleUserData={handleUserData}
+                  handleNext={handleNext}
+                  userData={userData}
+                />
+              )}
               {count === 2 && (
                 <UserBirthDate
+                  handleUserData={handleUserData}
                   handleNext={handleNext}
                   handlePrev={handlePrev}
                 />
               )}
               {count === 3 && (
-                <UserAddress handleNext={handleNext} handlePrev={handlePrev} />
+                <UserAddress
+                  handleUserData={handleUserData}
+                  handleNext={handleNext}
+                  handlePrev={handlePrev}
+                />
               )}
               {count === 4 && (
                 <UserEmailPassword
+                  handleUserData={handleUserData}
                   handleNext={handleNext}
                   handlePrev={handlePrev}
                 />
@@ -52,44 +87,6 @@ const Register = () => {
         </Row>
       </Container>
     </section>
-  );
-};
-
-const UserName = ({ handleNext }) => {
-  return (
-    <Card className="p-3 border-0 shadow">
-      <div className="text-center">
-        <h3 className="">Enter Your Name</h3>
-        <p className="text-muted">Please Enter Your Real Life name</p>
-      </div>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter Your First name" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter Your Last Name" />
-        </Form.Group>
-      </Form>
-      <div className="text-end">
-        <div
-          onClick={() => handleNext()}
-          className="fw-bold d-inline-block pointer mb-3 text-blue-green h4"
-        >
-          Next
-        </div>
-      </div>
-      <hr className="m-0 mb-3 w-75 mx-auto" />
-      <Link
-        to="/account/login"
-        className="text-blue-green text-center text-decoration-none"
-      >
-        Already have an account?{" "}
-        <span className="text-decoration-underline">login here</span>
-      </Link>
-    </Card>
   );
 };
 
@@ -114,7 +111,7 @@ const UserEmailPassword = ({ handlePrev, handleNext }) => {
             required
           />
           <Form.Text className="text-muted">
-            Password Must Be Atleast 6 Characters
+            Password Must Be At Least 6 Characters
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -126,14 +123,16 @@ const UserEmailPassword = ({ handlePrev, handleNext }) => {
           />
         </Form.Group>
       </Form>
-      <div className="d-flex justify-content-between">
-        <div
+      <div className="d-flex mb-3 align-items-center justify-content-between">
+        <h4
           onClick={() => handlePrev()}
-          className="fw-bold text-start d-inline-block pointer mb-3 text-danger h4"
+          className="fw-bold text-start d-inline-block pointer text-danger h4"
         >
           Prev
-        </div>
-        <button className="btn-blue-green">Register</button>
+        </h4>
+        <button className="btn-blue-green fw-bold shadow py-2 px-5">
+          Register
+        </button>
       </div>
       <hr className="m-0 mb-3 w-75 mx-auto" />
       <Link
@@ -148,6 +147,17 @@ const UserEmailPassword = ({ handlePrev, handleNext }) => {
 };
 
 const UserBirthDate = ({ handleNext, handlePrev }) => {
+  const [isNext, setIsNext] = useState(false);
+  const [birthDate, setBirthDate] = useState(null);
+  const [age, setAge] = useState(0);
+
+  const handleChange = (e) => {
+    setBirthDate(new Date(e.target.value).toDateString());
+    setAge(new Date() - new Date(birthDate));
+  };
+  console.log(birthDate);
+  console.log(age);
+
   return (
     <Card className="p-3 border-0 shadow">
       <div className="text-center">
@@ -157,7 +167,7 @@ const UserBirthDate = ({ handleNext, handlePrev }) => {
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Select Your Birthdate</Form.Label>
-          <Form.Control type="date" required />
+          <Form.Control onChange={handleChange} type="date" required />
         </Form.Group>
       </Form>
       <div className="d-flex justify-content-between">
