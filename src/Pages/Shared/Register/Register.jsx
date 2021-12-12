@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { nameValidation } from "../../../validations/authValidation";
+import UserBirthDate from "./UserBirthDate";
 import UserName from "./UserName";
 
 const Register = () => {
@@ -66,6 +67,7 @@ const Register = () => {
                   handleUserData={handleUserData}
                   handleNext={handleNext}
                   handlePrev={handlePrev}
+                  userData={userData}
                 />
               )}
               {count === 3 && (
@@ -126,63 +128,13 @@ const UserEmailPassword = ({ handlePrev, handleNext }) => {
       <div className="d-flex mb-3 align-items-center justify-content-between">
         <h4
           onClick={() => handlePrev()}
-          className="fw-bold text-start d-inline-block pointer text-danger h4"
+          className="fw-bold text-start d-inline-block shadow-sm text-hover pointer text-danger h4"
         >
           Prev
         </h4>
         <button className="btn-blue-green fw-bold shadow py-2 px-5">
           Register
         </button>
-      </div>
-      <hr className="m-0 mb-3 w-75 mx-auto" />
-      <Link
-        to="/account/login"
-        className="text-blue-green text-center text-decoration-none"
-      >
-        Already have an account?{" "}
-        <span className="text-decoration-underline">login here</span>
-      </Link>
-    </Card>
-  );
-};
-
-const UserBirthDate = ({ handleNext, handlePrev }) => {
-  const [isNext, setIsNext] = useState(false);
-  const [birthDate, setBirthDate] = useState(null);
-  const [age, setAge] = useState(0);
-
-  const handleChange = (e) => {
-    setBirthDate(new Date(e.target.value).toDateString());
-    setAge(new Date() - new Date(birthDate));
-  };
-  console.log(birthDate);
-  console.log(age);
-
-  return (
-    <Card className="p-3 border-0 shadow">
-      <div className="text-center">
-        <h3 className="">What is your Bithdate?</h3>
-        <p className="text-muted">Please Select your original birthdate</p>
-      </div>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Select Your Birthdate</Form.Label>
-          <Form.Control onChange={handleChange} type="date" required />
-        </Form.Group>
-      </Form>
-      <div className="d-flex justify-content-between">
-        <div
-          onClick={() => handlePrev()}
-          className="fw-bold text-start d-inline-block pointer mb-3 text-danger h4"
-        >
-          Prev
-        </div>
-        <div
-          onClick={() => handleNext()}
-          className="fw-bold text-end d-inline-block pointer mb-3 text-blue-green h4"
-        >
-          Next
-        </div>
       </div>
       <hr className="m-0 mb-3 w-75 mx-auto" />
       <Link
@@ -219,19 +171,19 @@ const UserAddress = ({ handlePrev, handleNext }) => {
       <div className="d-flex justify-content-between align-items-center">
         <div
           onClick={() => handlePrev()}
-          className="fw-bold text-start d-inline-block pointer mb-3 text-danger h4"
+          className="fw-bold text-start d-inline-block pointer shadow-sm text-hover mb-3 text-danger h4"
         >
           Prev
         </div>
         <div
           onClick={() => handleNext()}
-          className="fw-bold text-end d-inline-block pointer mb-3 text-info h5"
+          className="fw-bold text-end d-inline-block pointer shadow-sm text-hover mb-3 text-info h5"
         >
           Skip
         </div>
         <div
           onClick={() => handleNext()}
-          className="fw-bold text-end d-inline-block pointer mb-3 text-blue-green h4"
+          className="fw-bold text-end d-inline-block pointer shadow-sm text-hover mb-3 text-blue-green h4"
         >
           Next
         </div>
