@@ -14,3 +14,15 @@ export const nameValidation = ({ firstName, lastName }) => {
   }
   return errors;
 };
+
+export const emailPasswordValidation = (data) => {
+  const errors = {};
+  if (data.password.length < 6 || data.password.length > 20) {
+    errors.password = "Password must be between 6 to 20 characters";
+  }
+  if (data.password !== data.confirmPassword) {
+    errors.confirmPassword = "Confirm Password does not match";
+  }
+
+  return errors;
+};

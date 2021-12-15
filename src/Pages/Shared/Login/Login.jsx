@@ -1,11 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form, Row, Button, Col, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import useFirebase from "../../../Hooks/useFirebase";
+import { setUser } from "../../../store/actions/actions";
 
 const Login = () => {
   useEffect(() => {
     document.title = "Login your account | Birdstory";
+    console.log("logiing");
   }, []);
+
+  const [loginData, setLoginData] = useState({});
+  const { loginEmailPassword, setIsLoading } = useFirebase();
+  const dispatch = useDispatch();
+
+  const location = useLocation();
+
+  console.log(location);
+
+  const handleChange = (e) => {
+    const field = e.target.name;
+    const value = e.target.value;
+    const newLoginData = { ...loginData };
+    newLoginData[field] = value;
+    setLoginData(newLoginData);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginEmailPassword(loginData)
+      .then((result) => {
+        dispatch(setUser(result.user));
+      })
+      .catch((err) => console.log(err.message))
+      .finally(() => setIsLoading(false));
+  };
 
   return (
     <section>
@@ -40,21 +70,34 @@ const Login = () => {
                   Birdstory
                 </h1>
                 <Card className="w-100 p-4 shadow-sm border-0">
-                  <Form>
+                  <Form onSubmit={handleSubmit}>
                     <h3 className="text-blue-green text-center">
                       WELCOME BACK!
                     </h3>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                       <Form.Label>Email address</Form.Label>
-                      <Form.Control type="email" placeholder="Enter email" />
+                      <Form.Control
+                        onChange={handleChange}
+                        name="email"
+                        type="email"
+                        placeholder="Enter email"
+                      />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" placeholder="Password" />
+                      <Form.Control
+                        onChange={handleChange}
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                      />
                     </Form.Group>
 
-                    <button className="btn-blue-green w-100 fw-bold">
+                    <button
+                      type="submit"
+                      className="btn-blue-green w-100 fw-bold"
+                    >
                       Login
                     </button>
                   </Form>

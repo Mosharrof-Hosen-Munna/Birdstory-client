@@ -30,6 +30,7 @@ const UserName = ({ handleNext, handleUserData, userData }) => {
     } else if (userData.lastName) {
       setNameData({ firstName: "", lastName: userData.lastName });
     }
+    console.log("gglsdfkgjlsdkfgjsdl;f");
   }, []);
 
   // check validation every time when nameData changes
@@ -43,12 +44,14 @@ const UserName = ({ handleNext, handleUserData, userData }) => {
     } else {
       setIsNext(false);
     }
+    console.log("dfgsdfjkgsdl;fgksdjfglkjl");
   }, [nameData]);
 
   // set Errors object emty and set isNext false for first time rendering
   useEffect(() => {
     setErrors({});
     setIsNext(false);
+    console.log("gsdfgkjsdlfkgj");
   }, []);
 
   const goNext = () => {
