@@ -18,10 +18,12 @@ const PrivateRoute = ({ children, ...rest }) => {
       </div>
     );
   }
-  if (!user.email && !isLoading) {
+  if (user.email) {
+    return children;
+  }
+  if (!user.email && isLoading) {
     navigate("/account/login", { state: { id: 7, color: "green" } });
   }
-
   return children;
 };
 
@@ -31,18 +33,10 @@ export const AuthenticationPrivateRoute = ({ children, ...rest }) => {
   if (isLoading) {
     return (
       <div className="text-center mx-auto py-5">
-        <Spinner animatio n="border" variant="danger" />
+        <Spinner animation="border" variant="danger" />
       </div>
     );
   }
-  return Object.keys(user).length === 0 ? (
-    children
-  ) : (
-    <Navigate
-      to={{
-        pathname: "/",
-      }}
-    />
-  );
+  return Object.keys(user).length === 0 ? children : <Navigate to="/" />;
 };
 export default PrivateRoute;

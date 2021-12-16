@@ -35,13 +35,16 @@ const useFirebase = () => {
   //   setIsLoading(true);
   //   onAuthStateChanged(auth, (user) => {
   //     console.log("glkdjfglksdfjglksdfjglsdkfgj");
+  //     console.log(isLoading);
+  //     console.log(user);
   //     if (user) {
+  //       setIsLoading(false);
   //       dispatch(setUser(user));
   //     } else {
+  //       setIsLoading(false);
   //       dispatch(setUser({}));
   //     }
-  //     console.log("gdfgjsdlfgkjdsfg");
-  //     setIsLoading(false);
+  //     console.log(isLoading);
   //   });
   // };
   useEffect(() => {
@@ -54,6 +57,7 @@ const useFirebase = () => {
       }
       setIsLoading(false);
     });
+    console.log(isLoading);
   }, []);
   const logOut = () => {
     setIsLoading(true);

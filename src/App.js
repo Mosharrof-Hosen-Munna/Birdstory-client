@@ -8,7 +8,14 @@ import Home from "./Pages/Home/Home";
 import PrivateRoute, {
   AuthenticationPrivateRoute,
 } from "./Pages/PrivateRoute/PrivateRoute";
+import NotFound from "./Pages/NotFound/NotFound";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Profile from "./Pages/Profile/Profile";
 function App() {
+  useFirebase();
+  // useEffect(() => {
+  //   getCurrentUser();
+  // }, []);
   return (
     <Router>
       <Routes>
@@ -17,6 +24,22 @@ function App() {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
             </PrivateRoute>
           }
         />
@@ -36,6 +59,7 @@ function App() {
             </AuthenticationPrivateRoute>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
