@@ -18,6 +18,10 @@ code {
     monospace;
 }
 
+.bg-blue-white {
+  color: #f0f7ff !important;
+}
+
 .text-blue-green {
   color: #00cec9 !important;
 }

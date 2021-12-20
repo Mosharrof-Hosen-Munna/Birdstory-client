@@ -13,7 +13,7 @@ const ProfileHeader = () => {
           <div>
             <img
               className="profile-cover-photo"
-              src="https://scontent.fdac116-1.fna.fbcdn.net/v/t39.30808-6/248371655_726338244992469_5362424120908875208_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeFjNz6J5lrLW18yxj610ffk7QOxJJCBoCHtA7EkkIGgIXP9Ulnmkr5HZn2dplFh4lwfgW7tGkrN3lHXkRAbJrkt&_nc_ohc=Ywqph6ddQeoAX-ZJkI2&_nc_ht=scontent.fdac116-1.fna&oh=00_AT_sYb1wC99Aha_ujC2JMBGfKb4_BevxVnx_UKdFxP7t0A&oe=61BFFC31"
+              src="https://scontent.fdac24-2.fna.fbcdn.net/v/t39.30808-6/248371655_726338244992469_5362424120908875208_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeFjNz6J5lrLW18yxj610ffk7QOxJJCBoCHtA7EkkIGgIXP9Ulnmkr5HZn2dplFh4lwfgW7tGkrN3lHXkRAbJrkt&_nc_ohc=hEx7GAsDEYIAX-ktRYb&_nc_ht=scontent.fdac24-2.fna&oh=00_AT_xSYf1dld4nI_mLfFdR9QTbRWjTlYdmpY4r-KFUwidUQ&oe=61C5EAF1"
               alt=""
             />
             <div className="overflow-hidden"></div>

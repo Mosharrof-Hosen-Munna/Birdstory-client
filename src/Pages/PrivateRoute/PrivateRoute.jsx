@@ -13,7 +13,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     console.log("loding");
     return (
       <div className="text-center vh-100 d-flex justify-content-center align-items-center mx-auto py-5">
-        <Spinner animation="border" variant="danger" />
+        <Spinner animation="border" variant="primary" />
       </div>
     );
   }

@@ -7,11 +7,13 @@ const MobileHeader = () => {
   return (
     <section
       style={{ zIndex: "10" }}
-      className="bg-white position-sticky w-100 top-0 mb-4"
+      className="bg-white position-sticky d-block d-md-none w-100 top-0 mb-3 shadow-sm"
     >
       <Container>
         <div className="py-1 d-flex align-items-center">
-          <h4 className="text-blue-green birdstory-logo fw-bold">Birdstory</h4>
+          <h4 className="text-blue-green birdstory-logo mb-0 fw-bold">
+            Birdstory
+          </h4>
           <div className="ms-auto d-flex align-items-center">
             <input
               type="text"

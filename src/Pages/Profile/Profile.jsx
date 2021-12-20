@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import MobileHeader from "../Shared/MobileHeader/MobileHeader";
-import MobileNavigation from "../Shared/Navigation/MobileNavigation";
 import Navigation from "../Shared/Navigation/Navigation";
 import Post from "../Shared/Post/Post";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = () => {
+  useEffect(() => {
+    document.title = "My Profile | Birdstory";
+  }, []);
   return (
     <div>
       <Navigation />
-      <MobileNavigation />
-      <MobileHeader />
+
       <ProfileHeader />
       <Container>
         <div className=" my-2 mx-0  mx-md-5">

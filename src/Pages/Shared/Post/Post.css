@@ -45,4 +45,7 @@
   .post-text {
     font-size: 14px;
   }
+  body {
+    margin-bottom: 70px !important;
+  }
 }

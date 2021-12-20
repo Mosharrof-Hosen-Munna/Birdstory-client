@@ -13,6 +13,8 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Profile from "./Pages/Profile/Profile";
 import { useSelector } from "react-redux";
 import UpdateProfile from "./Pages/UpdateProfile/UpdateProfile";
+import Notifications from "./Pages/Notifications/Notifications";
+import Bookmarks from "./Pages/Bookmarks/Bookmarks";
 function App() {
   const user = useSelector((state) => state.auth.user);
   const { getCurrentUser } = useFirebase();
@@ -51,6 +53,22 @@ function App() {
           element={
             <PrivateRoute>
               <UpdateProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <PrivateRoute>
+              <Notifications />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/bookmarks"
+          element={
+            <PrivateRoute>
+              <Bookmarks />
             </PrivateRoute>
           }
         />
