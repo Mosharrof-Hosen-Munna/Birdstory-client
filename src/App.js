@@ -11,8 +11,11 @@ import PrivateRoute, {
 import NotFound from "./Pages/NotFound/NotFound";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Profile from "./Pages/Profile/Profile";
+import { useSelector } from "react-redux";
+import UpdateProfile from "./Pages/UpdateProfile/UpdateProfile";
 function App() {
-  useFirebase();
+  const user = useSelector((state) => state.auth.user);
+  const { getCurrentUser } = useFirebase();
   // useEffect(() => {
   //   getCurrentUser();
   // }, []);
@@ -40,6 +43,14 @@ function App() {
           element={
             <PrivateRoute>
               <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/update-profile"
+          element={
+            <PrivateRoute>
+              <UpdateProfile />
             </PrivateRoute>
           }
         />

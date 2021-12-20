@@ -1,0 +1,9 @@
+.header-input {
+  outline: none;
+  border: none;
+  border-radius: 20px;
+}
+.header-input:focus {
+  background-color: #999999;
+  color: white;
+}

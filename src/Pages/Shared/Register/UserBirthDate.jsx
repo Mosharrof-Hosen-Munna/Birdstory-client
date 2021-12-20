@@ -16,7 +16,6 @@ const UserBirthDate = ({
     } else {
       setIsNext(false);
     }
-    console.log("rendering");
   }, [userData.birthDate]);
 
   const handleBirthdate = (e) => {

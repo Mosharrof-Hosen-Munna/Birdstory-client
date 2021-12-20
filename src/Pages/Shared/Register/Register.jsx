@@ -4,7 +4,8 @@ import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import useFirebase from "../../../Hooks/useFirebase";
-import { setUser } from "../../../store/actions/actions";
+import { setIsLoading, setUser } from "../../../store/actions/authActions";
+import Axios from "axios";
 import { emailPasswordValidation } from "../../../validations/authValidation";
 import UserBirthDate from "./UserBirthDate";
 import UserInfo from "./UserInfo";
@@ -24,7 +25,6 @@ const Register = () => {
 
   useEffect(() => {
     document.title = "Register your new account | Birdstory";
-    console.log("ggggg");
   }, []);
 
   // add new data to userData state of object
@@ -131,15 +131,35 @@ const UserEmailPassword = ({ handlePrev, handleUserData, userData }) => {
       setErrors(errorsMessage);
     } else {
       setErrors({});
-      // adfsdf
-      registerEmailPassword(userData).then((result) => {
-        const user = result.user;
-        sendEmailVerification(auth.currentUser);
-        navigate("/account/login");
-      });
+      registerEmailPassword(userData)
+        .then((result) => {
+          const user = result.user;
+          sendEmailVerification(auth.currentUser);
+
+          const databaseUserData = {
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            email: user.email,
+            address: userData.address,
+            phone: userData.phone,
+            birthDate: userData.birthDate,
+          };
+
+          Axios.post(
+            "http://localhost:5000/api/auth/user/create",
+            databaseUserData
+          )
+            .then((res) => {
+              console.log(res.data);
+              navigate("/account/login");
+            })
+            .catch((e) => console.log(e.message));
+        })
+        .catch((e) => console.log(e.message))
+        .finally(() => dispatch(setIsLoading(false)));
     }
   };
-
+  console.log("asdfosad someting");
   return (
     <Card className="p-3 border-0 shadow">
       <div className="text-center">

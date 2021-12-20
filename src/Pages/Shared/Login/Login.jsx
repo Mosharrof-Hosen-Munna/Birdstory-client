@@ -3,21 +3,20 @@ import { Container, Form, Row, Button, Col, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import useFirebase from "../../../Hooks/useFirebase";
-import { setUser } from "../../../store/actions/actions";
+import { setIsLoading, setUser } from "../../../store/actions/authActions";
 
 const Login = () => {
   useEffect(() => {
     document.title = "Login your account | Birdstory";
-    console.log("logiing");
   }, []);
 
   const [loginData, setLoginData] = useState({});
-  const { loginEmailPassword, setIsLoading } = useFirebase();
+  const { loginEmailPassword } = useFirebase();
   const dispatch = useDispatch();
 
   const location = useLocation();
 
-  console.log(location);
+  // console.log(location);
 
   const handleChange = (e) => {
     const field = e.target.name;
@@ -34,7 +33,7 @@ const Login = () => {
         dispatch(setUser(result.user));
       })
       .catch((err) => console.log(err.message))
-      .finally(() => setIsLoading(false));
+      .finally(() => dispatch(setIsLoading(false)));
   };
 
   return (

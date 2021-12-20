@@ -1,11 +1,15 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import "./ProfileHeader.css";
 const ProfileHeader = () => {
+  const user = useSelector((state) => state.auth.user);
   return (
     <section>
       <Container>
-        <div className="mt-2 profile-header ">
+        <div className="mt-2  profile-header ">
           <div>
             <img
               className="profile-cover-photo"
@@ -19,9 +23,12 @@ const ProfileHeader = () => {
             <h6 className="text-hover  fw-bold pointer m-3 text-blue-green rounded bg-white d-inline-block">
               New Blogs
             </h6>
-            <h6 className="text-hover  fw-bold pointer m-3 text-blue-green rounded bg-white d-inline-block">
-              Edit Profile
-            </h6>
+            <Link
+              className="text-hover  fw-bold pointer m-3 text-blue-green rounded bg-white d-inline-block"
+              to="/update-profile"
+            >
+              <h6 className="mb-0">Edit Profile</h6>
+            </Link>
           </div>
           <div className="d-flex justify-content-center">
             <img
@@ -31,11 +38,14 @@ const ProfileHeader = () => {
             />
           </div>
           <div className="text-center text-light">
-            <h2>Pinominal Munna (Prince)</h2>
+            <h2>{user.displayName}</h2>
             <p className="text-light pb-3 profile-bio">
               ******* Full Stack Web Developer ******* ❤️❤️বাবা- মার ছোট ছেলে
               ❤️❤️ ❤️❤️Emotional Boy❤️❤️
             </p>
+          </div>
+          <div className="d-block d-md-none">
+            <ProfileInfo></ProfileInfo>
           </div>
         </div>
       </Container>

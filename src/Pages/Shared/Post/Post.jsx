@@ -12,9 +12,14 @@ import "./Post.css";
 const Post = () => {
   const [isShow, setIsShow] = useState(false);
   const [isMention, setIsMention] = useState(false);
+  const [menuShow, setMenuShow] = useState(false);
 
   const handleShow = () => {
     setIsShow(!isShow);
+  };
+
+  const handleMenuShow = () => {
+    setMenuShow(!menuShow);
   };
 
   const handleMention = () => {
@@ -24,7 +29,7 @@ const Post = () => {
   return (
     <Card className="my-2 border-0 shadow-sm">
       <div className="d-flex align-items-center justify-content-between">
-        <div className="d-flex align-items-center">
+        <div className="d-flex  align-items-center">
           <img
             className="post-pic mx-3 my-2"
             src="https://scontent.fdac116-1.fna.fbcdn.net/v/t39.30808-1/c80.0.320.320a/p320x320/248430183_726337181659242_4371244059268715231_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeHhDaENlRX2wc0eccIQdcVXiH3Pj0s566OIfc-PSznroyWN-eG4hJhTyLmarBFoSWWxgfPTMUvZ3WUrgW5tHR3e&_nc_ohc=uARngyySUXoAX_peyvb&_nc_ht=scontent.fdac116-1.fna&oh=00_AT_C7_5SGmY8ab1wjtQLj3gSMwPogVz0j-tb3DOYdPCdoQ&oe=61C0DCD2"
@@ -36,13 +41,29 @@ const Post = () => {
           </div>
         </div>
         <div className="me-3 text-end">
-          <FontAwesomeIcon className="" icon={faEllipsisH} />
+          <div
+            className="position-relative d-inline-block px-2 py-1 pointer rounded-circle text-hover"
+            onClick={handleMenuShow}
+          >
+            <FontAwesomeIcon icon={faEllipsisH} />
+          </div>
+          {menuShow && (
+            <div className="position-absolute shadow-lg post-menu">
+              <ul>
+                <li>Bookmarks Post</li>
+                <li>Don't see this post</li>
+                <li>Delete post</li>
+              </ul>
+            </div>
+          )}
           <p className="m-0">6h ago</p>
         </div>
       </div>
       {/* post body */}
       <div
-        className={`p-3 mb-3 ${isShow ? "" : "post-body"} position-relative`}
+        className={`p-3 mb-3 ${
+          isShow ? "" : "post-body"
+        } post-text position-relative`}
       >
         <div onClick={handleShow}>
           ব্যাচ-৪ স্ট্রাইকস !!! এইখানে যাদের নাম বা ছবি আছে শুধু তারা না। বরং
@@ -98,17 +119,17 @@ const Post = () => {
         </div>
         <hr className="m-1" />
         <div className="d-flex justify-content-around">
-          <h6 className="pointer rounded px-2 d-flex align-items-center px-md-1 text-hover py-2 mb-0">
+          <h6 className="pointer rounded px-2 d-flex align-items-center px-md-1 px-lg-5 text-hover py-2 mb-0">
             <FontAwesomeIcon className="me-2" icon={faThumbsUp} />
             Like
           </h6>
-          <h6 className="pointer rounded px-2 px-md-1 d-flex align-items-center text-hover py-2 mb-0">
+          <h6 className="pointer rounded px-2 px-md-1 px-lg-5 d-flex align-items-center text-hover py-2 mb-0">
             <FontAwesomeIcon className="me-2" icon={faThumbsDown} />
             Dislike
           </h6>
           <h6
             onClick={handleMention}
-            className="pointer rounded px-2 px-md-1 d-flex align-items-center text-hover py-2 mb-0"
+            className="pointer rounded px-2 px-md-1 px-lg-5 d-flex align-items-center text-hover py-2 mb-0"
           >
             <FontAwesomeIcon className="me-2" icon={faComment} />
             Mention

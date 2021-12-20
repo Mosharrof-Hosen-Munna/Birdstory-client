@@ -2,37 +2,45 @@ import React from "react";
 import { Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
-import useFirebase from "../../Hooks/useFirebase";
 
 const PrivateRoute = ({ children, ...rest }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
-  const { isLoading } = useFirebase();
+  const isLoading = useSelector((state) => state.auth.isLoading);
   const location = useLocation();
-  console.log(location);
 
   if (isLoading) {
+    console.log("loding");
     return (
-      <div className="text-center mx-auto py-5">
+      <div className="text-center vh-100 d-flex justify-content-center align-items-center mx-auto py-5">
         <Spinner animation="border" variant="danger" />
       </div>
     );
   }
-  if (user.email) {
-    return children;
-  }
-  if (!user.email && isLoading) {
-    navigate("/account/login", { state: { id: 7, color: "green" } });
-  }
-  return children;
+
+  // if (!user.emailVerified) {
+  //   return (
+  //     <h3 className="text-center text-blue-green vh-100 d-flex align-items-center justify-content-center">
+  //       Verification Email sent successfully! Please check your mail inbox for
+  //       verify your account.
+  //     </h3>
+  //   );
+  // }
+
+  return user.email ? (
+    children
+  ) : (
+    <Navigate to="/account/login" replace={true} />
+  );
 };
 
 export const AuthenticationPrivateRoute = ({ children, ...rest }) => {
   const user = useSelector((state) => state.auth.user);
-  const { isLoading } = useFirebase();
+
+  const isLoading = useSelector((state) => state.auth.isLoading);
   if (isLoading) {
     return (
-      <div className="text-center mx-auto py-5">
+      <div className="text-center vh-100 d-flex justify-content-center align-items-center mx-auto py-5">
         <Spinner animation="border" variant="danger" />
       </div>
     );

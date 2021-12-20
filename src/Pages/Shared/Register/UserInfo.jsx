@@ -11,7 +11,6 @@ const UserInfo = ({ handlePrev, handleNext, userData, handleUserData }) => {
     } else {
       setIsNext(false);
     }
-    console.log("dfgdfgdfgdfg");
   }, [userData.address, userData.phone]);
 
   const changeHandler = (e) => {
